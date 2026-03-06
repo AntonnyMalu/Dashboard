@@ -11,7 +11,9 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        //
+        $middleware->web(append: [
+            \Illuminate\Http\Middleware\SetCacheHeaders::class . ':no_store;max_age=0',
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //
